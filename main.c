@@ -12,7 +12,6 @@ void screenArea(char (*arr)[screenWidth]);
 void printScreen(char (*arr)[screenWidth]);
 void clearScreen(void);
 void drawCar(char (*source)[screenWidth],char (*target)[carWidth],int ,int );
-//void waitFor (unsigned int);
 int moveRight(int *ptr);
 void moveLeft(int *ptr);
 void initCar(char (*arr)[carWidth]);
@@ -48,7 +47,10 @@ int main()
         else
         {
             car1colPos =rand_interval(1,screenWidth-4);
+            fflush(stdin);
             car2colPos =rand_interval(1,screenWidth-4);
+            fflush(stdin);
+
             car1rowPos=0;
             car2rowPos=0;
         }
@@ -56,12 +58,12 @@ int main()
 
         clearScreen();
         printScreen(LCD);
-        delay(300);
+        //delay(150);
         /* if(moveRight(&key)==0)
           break;
 
          printf("%d",moveRight(&key));*/
-
+        fflush(stdin);
     }
     return 0;
 }
@@ -80,11 +82,7 @@ void initCar(char (*arr)[carWidth])
     arr[2][2]='*';
 }
 /////////////////////////////////////
-/*void waitFor (unsigned int secs)
-{
-    int retTime = time(0) + secs;     // Get finishing time.
-    while (time(0) < retTime);    // Loop until it arrives.
-}
+
 void screenArea(char (*arr)[screenWidth])
 {
     int i=0,j=0;
@@ -155,6 +153,7 @@ int moveRight(int *key)
 
 unsigned int rand_interval(unsigned int min, unsigned int max)
 {
+
     int r;
     const unsigned int range = 1 + max - min;
     const unsigned int buckets = RAND_MAX / range;
@@ -163,13 +162,13 @@ unsigned int rand_interval(unsigned int min, unsigned int max)
     /* Create equal size buckets all in a row, then fire randomly towards
      * the buckets until you land in one of them. All buckets are equally
      * likely. If you land off the end of the line of buckets, try again. */
-do
-{
-    r = rand();
-}
-while (r >= limit);
+    do
+    {
+        r = rand();
+    }
+    while (r >= limit);
 
-return min + (r / buckets);
+    return min + (r / buckets);
 }
 
 void delay(int milliseconds)
